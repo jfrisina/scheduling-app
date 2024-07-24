@@ -1,4 +1,4 @@
-const data = [
+const shiftData = [
 	{name:'Aurora', position: 'Reference', date: '2024-08-01', starttime: '0900', endtime: '1200'},
 	{name:'Nova', position: 'Reference', date: '2024-08-02', starttime: '0900', endtime: '1200'},
 	{name:'Juniper', position: 'Reference', date: '2024-08-01', starttime: '1200', endtime: '1700'},

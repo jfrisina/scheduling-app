@@ -26,7 +26,7 @@ const ReadShift = async (req, res) => {
   }
 };
 
-const UpdateShifts = async (req, res) => {
+const UpdateShift = async (req, res) => {
   try {
     const updatedShift = await Shifts.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
