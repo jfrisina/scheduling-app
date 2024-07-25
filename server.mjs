@@ -25,7 +25,6 @@ app.use(express.json());
 // prevent Cross-Origin Resource Sharing
 app.use(cors()); 
 
-
 /* DATABASE DATA ---------------------------------------------------------*/
 /* comment this out once done to prevent public from manipulating database */
 // populate db with initial data
@@ -38,6 +37,10 @@ app.get('/seed', async (req, res) => {
   res.send('seeding db');
 });
 
+// error checking 
+app.use((err, _req, res, next) => {
+  res.status(500).json({ msg: 'You have encountered an error' });
+});
 
 /* HOME PAGE ---------------------------------------------------------*/
 app.get('/', (req, res) => {
@@ -48,10 +51,6 @@ app.get('/', (req, res) => {
 app.use('/shift', shiftRoutes);
 // app.use('/employees', employeeRoute);
 
-// error checking 
-app.use((err, _req, res, next) => {
-  res.status(500).json({ msg: 'You have encountered an error' });
-});
 
 /* PORT / SERVER ---------------------------------------------------------*/
 // set up port listening for express server
