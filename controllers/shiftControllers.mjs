@@ -1,6 +1,8 @@
+/* IMPORTS -------------------------------------------------*/
 import Shifts from '../models/shiftSchema.mjs';
 
-//Functions
+/* CRUD ACTIONS -------------------------------------------------*/
+// create new shift
 const CreateShift = async (req, res) => {
   try {
     let newShift = new Shifts(req.body);
@@ -14,6 +16,7 @@ const CreateShift = async (req, res) => {
   }
 };
 
+// "read" shifts
 const ReadShift = async (req, res) => {
   try {
     //Get data dn save to variable
@@ -26,6 +29,7 @@ const ReadShift = async (req, res) => {
   }
 };
 
+// update shift
 const UpdateShift = async (req, res) => {
   try {
     const updatedShift = await Shifts.findByIdAndUpdate(req.params.id, req.body, {
@@ -39,6 +43,7 @@ const UpdateShift = async (req, res) => {
   }
 };
 
+// delete shift
 const DeleteShift = async (req, res) => {
   try {
     await Shifts.findByIdAndDelete(req.params.id);
@@ -49,4 +54,6 @@ const DeleteShift = async (req, res) => {
     res.status(500).json({ msg: `Server Error` });
   }
 };
+
+/* EXPORT -------------------------------------------------*/
 export default { CreateShift, ReadShift, UpdateShift, DeleteShift };

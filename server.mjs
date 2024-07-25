@@ -1,25 +1,36 @@
-//Imports
+/* SET UP ---------------------------------------------------------*/
+// imports
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.mjs';
 import shiftRoutes from './routes/shift.mjs';
 import shiftData from './utilities/data.mjs';
 import shiftSchema from './models/shiftSchema.mjs';
+import cors from 'cors';
 
-//Configurations
-dotenv.config();
+// configurations
 const app = express();
+
+// set up .env variables
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-//Connect to DB
+// Connect to database
 connectDB();
 
-//Middleware
-app.use(express.json());
+/* MIDDLEWARE ---------------------------------------------------------*/
+// parse JSON content sent in the body of incoming requests
+app.use(express.json()); 
 
-//Routes
-app.use('/shift', shiftRoutes);
+// prevent Cross-Origin Resource Sharing
+app.use(cors()); 
 
+// error checking 
+app.use((err, _req, res, next) => {
+  res.status(500).json({ msg: 'You have encountered an error' });
+});
+
+/* DATABASE DATA ---------------------------------------------------------*/
 /* comment this out once done to prevent public from manipulating database */
 // populate db with initial data
 app.get('/seed', async (req, res) => {
@@ -27,17 +38,23 @@ app.get('/seed', async (req, res) => {
   await shiftSchema.deleteMany({});
   // add data 
   await shiftSchema.create(shiftData);
-  // prove you did it
+  // show on page
   res.send('seeding db');
 });
 
 
-//Error Checking Middleware
-app.use((err, _req, res, next) => {
-  res.status(500).json({ msg: 'You have encountered an error' });
+/* HOME PAGE ---------------------------------------------------------*/
+app.get('/', (req, res) => {
+  res.send('hello world');
 });
 
-//Listen to our express server
+/* ROUTES ---------------------------------------------------------*/
+app.use('/shift', shiftRoutes);
+// app.use('/employees', employeeRoute);
+
+
+/* PORT / SERVER ---------------------------------------------------------*/
+// set up port listening for express server
 app.listen(PORT, () => {
   console.log(`Server is listening on Port: ${PORT}`);
 });
