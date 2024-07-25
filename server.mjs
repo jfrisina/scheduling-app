@@ -25,10 +25,6 @@ app.use(express.json());
 // prevent Cross-Origin Resource Sharing
 app.use(cors()); 
 
-// error checking 
-app.use((err, _req, res, next) => {
-  res.status(500).json({ msg: 'You have encountered an error' });
-});
 
 /* DATABASE DATA ---------------------------------------------------------*/
 /* comment this out once done to prevent public from manipulating database */
@@ -52,6 +48,10 @@ app.get('/', (req, res) => {
 app.use('/shift', shiftRoutes);
 // app.use('/employees', employeeRoute);
 
+// error checking 
+app.use((err, _req, res, next) => {
+  res.status(500).json({ msg: 'You have encountered an error' });
+});
 
 /* PORT / SERVER ---------------------------------------------------------*/
 // set up port listening for express server
