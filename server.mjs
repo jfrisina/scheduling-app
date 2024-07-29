@@ -8,14 +8,17 @@ import cors from 'cors';
 // routes
 import shiftRoutes from './routes/shift.mjs';
 import employeeRoutes from './routes/employee.mjs';
+import positionRoutes from './routes/position.mjs'
 
 // data
 import shiftData from './utilities/data.mjs';
 import employeeData from './utilities/employeeData.mjs';
+import positionData from './utilities/positionData.mjs';
 
 // schemas
 import shiftSchema from './models/shiftSchema.mjs';
 import employeeSchema from './models/employeeSchema.mjs';
+import positionSchema from './models/positionSchema.mjs'
 
 // database file
 import connectDB from './config/db.mjs';
@@ -48,10 +51,12 @@ app.get('/seed', async (req, res) => {
   // delete everything from db to prevent duplicates of initial data
   await shiftSchema.deleteMany({});
   await employeeSchema.deleteMany({});
+  await positionSchema.deleteMany({});
 
   // add data 
   await shiftSchema.create(shiftData);
   await employeeSchema.create(employeeData);
+  await positionSchema.create(positionData);
 
   // show on page
   res.send('seeding db');
@@ -70,6 +75,7 @@ app.get('/', (req, res) => {
 /* ROUTES ---------------------------------------------------------*/
 app.use('/shift', shiftRoutes);
 app.use('/employees', employeeRoutes);
+app.use('/position', positionRoutes);
 
 
 /* PORT / SERVER ---------------------------------------------------------*/
