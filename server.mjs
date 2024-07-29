@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
 /* ROUTES ---------------------------------------------------------*/
 app.use('/shift', shiftRoutes);
 app.use('/employees', employeeRoutes);
-app.use('/position', positionRoutes);
+app.use('/positions', positionRoutes);
 
 
 /* PORT / SERVER ---------------------------------------------------------*/
