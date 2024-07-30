@@ -43,7 +43,7 @@ const UpdateEmployee = async (req, res) => {
   }
 };
 
-// delete shift
+// delete employee
 const DeleteEmployee = async (req, res) => {
   try {
     await Employees.findByIdAndDelete(req.params.id);
