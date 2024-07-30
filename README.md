@@ -1,7 +1,7 @@
 # Scheduling App
 
 ## Description
-This is a scheduling app that displays the daily schedule. You can add, edit, delete, and see shifts and employees.
+This is a scheduling app that displays the daily schedule. You can add, edit, delete, and see shifts, employees, and positions.
 
 ## Tech Used
 * MongoDB
