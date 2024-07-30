@@ -9,7 +9,10 @@ const db = process.env.MONGO_URI;
 //Connection Function
 const connectDB = async () => {
   try {
-    await mongoose.connect(db);
+    mongoose.set('strictQuery', false);
+    await mongoose.connect(db, {
+      useNewUrlParser: true,
+    });
 
     console.log(`Mongoose DB Connected..`);
   } catch (err) {

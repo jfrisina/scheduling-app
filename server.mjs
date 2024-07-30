@@ -9,6 +9,8 @@ import cors from 'cors';
 import shiftRoutes from './routes/shift.mjs';
 import employeeRoutes from './routes/employee.mjs';
 import positionRoutes from './routes/position.mjs'
+import userRoutes from './routes/api/users.mjs';
+import authRoutes from './routes/api/auth.mjs';
 
 // data
 import shiftData from './utilities/data.mjs';
@@ -25,15 +27,17 @@ import connectDB from './config/db.mjs';
 
 /* SET UP ---------------------------------------------------------*/
 
-// express
+// connect database
 const app = express();
+
+// initialize middleware
+connectDB();
 
 // .env variables
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-// Connect to database
-connectDB();
+
 
 /* MIDDLEWARE -------------------------------------------------------------------*/
 // parse JSON content sent in the body of incoming requests
@@ -69,13 +73,15 @@ app.use((err, _req, res, next) => {
 
 /* HOME PAGE ---------------------------------------------------------*/
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.send('API Running');
 });
 
 /* ROUTES ---------------------------------------------------------*/
 app.use('/shift', shiftRoutes);
 app.use('/employees', employeeRoutes);
 app.use('/positions', positionRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 
 /* PORT / SERVER ---------------------------------------------------------*/
